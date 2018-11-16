@@ -1,0 +1,35 @@
+use sys;
+
+create table yonghu(yonghuID smallint unsigned not null auto_increment,
+
+zhanghu varchar(20) not null unique,
+
+mima varchar(20) not null,
+
+last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+ON UPDATE CURRENT_TIMESTAMP, 
+PRIMARY KEY (yonghuID))
+
+engine=InnoDB default charset=utf8;
+
+
+create table zhuangbei(zhuangbeiID smallint unsigned not null auto_increment,
+
+zhuangbeiname varchar(20) not null,
+
+price int(10) not null,
+gmtime datetime,
+
+yonghuID smallint unsigned not null,
+
+last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+ON UPDATE CURRENT_TIMESTAMP,
+ PRIMARY KEY (zhuangbeiID),
+
+KEY idx_fk_yonghuID (yonghuID),
+CONSTRAINT `fk_yonghu_zhuangbei` 
+FOREIGN KEY (yonghuID) REFERENCES yonghu(yonghuID) 
+
+ON DELETE RESTRICT ON UPDATE CASCADE)
+
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
