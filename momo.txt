@@ -1,0 +1,58 @@
+use gjj;
+
+
+create table momo(yonghuID smallint unsigned not null auto_increment,
+
+
+last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
+ON UPDATE CURRENT_TIMESTAMP, 
+
+PRIMARY KEY (yonghuID))
+
+
+engine=InnoDB default charset=utf8;
+
+
+
+
+create table EP(useID smallint unsigned not null auto_increment,
+
+user_name  varchar(40) not null,
+gender int(1) not null,
+
+tel int(11) not null,
+like_user_id varchar(40) not null,
+
+like_user_name varchar(40) not null,
+like_wx varchar(40) not null,
+
+yonghuID SMALLINT UNSIGNED NOT NULL,
+
+last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ 
+PRIMARY KEY (useID),
+KEY idx_fk_yonghuID (yonghuID),
+
+CONSTRAINT `fk_momo_EP` 
+FOREIGN KEY (yonghuID) REFERENCES momo(yonghuID) 
+
+
+ON DELETE RESTRICT ON UPDATE CASCADE)
+
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop procedure if exists momo_pro;
+
+delimiter $$
+create procedure momo_pro(in userName varchar(20),
+out result varchar(40))
+reads sql data
+begin
+select * from momo 
+where user_name=userName;
+select * into result;
+
+end$$
+delimiter ;
+call momo_pro("zhengbo",@searchs£©;
+select @searchs;
